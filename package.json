@@ -1,0 +1,14 @@
+{
+  "name": "node.js_besmart",
+  "version": "1.0.0",
+  "description": "Questo è ilprimo progetto Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Umberto Emanuele",
+  "license": "ISC",
+  "type": "commonjs"
+}
