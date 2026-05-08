@@ -238,5 +238,29 @@ console.timeEnd() // misurano la durata di un'operazione
     - stream        -> Gestisce flussi di dati, fondamentali per operazioni su file di grandi dimensioni o 
                        per la trasmissione di dati in rete.
 
-    -> vedere file exampleCoreModules.js
 */
+
+
+/*
+    Gli stream e i buffer sonbo due componenti importanti di Node.js 
+    che consentono di gestire grandi quantità di dati in modo efficiente e performante.
+    Uno Stream rappresenta una sequenza di dati che può essere letta o scritta in modo progressivo, 
+    evitando di caricare tutto in memoria contemporaneamente quando si elaborano risorse di grandi dimensioni
+    Un Buffer è un'area di memoria temporanea utilizzata per memorizzare dati binari. 
+    Fondamentale per lavorare con flussi di dati non testuali come immagini, audio e video
+*/
+
+/*
+    Gli Stream sono costruiti sull'evento 'data' e su metodi asincroni compatibili 
+    con l'architettura event-driven di Node.
+    Node.js offre quattro tipi principali di stream, ognuno con caratteristiche specifiche
+    -> Readable - flussi da cui è possibile leggere dati come file o richieste HTTP
+    -> Writable - flussi su cui è possibile scrivere dati come file di destinazione o risposte HTTP
+    -> Duplex - flussi che possono essere letti e scritti contemporaneamente, come i socket di rete
+    -> Transform - flussi duplex che includono una fase di trasformazione dei dati come compressione o crittografia
+*/
+
+
+
+
+
