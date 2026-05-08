@@ -43,17 +43,17 @@ xmlhttp.onload = function() {
     }
 }
 
-
 const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-        const success = true; // Simula un'operazione riuscita o fallita    
+        const success = true;   
         if (success) {
             resolve('Operazione completata con successo!');
-        } else {
+        }     else {    
             reject('Si è verificato un errore durante l\'operazione.');
-        }       
-    }, 2000); // Simula un'operazione asincrona che richiede 2 secondi
+        }
+    }, 2000);
 });
+
 
 console.log(promise);
 
@@ -64,4 +64,29 @@ promise.then(result => {
     console.error('Errore:', error);
 });
 
+
+const ajaxPromise = new Promise((resolve, reject) => {
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open('GET', 'https://jsonplaceholder.typicode.com/users');      
+    xmlhttp.onload = function() {
+        if (this.status === 200 && this.readyState === 4) {
+            const users = JSON.parse(this.responseText);
+            resolve(users);
+        } else {
+            reject(new Error(`Errore nella richiesta: ${this.status}`));
+        }
+    };
+    xmlhttp.onerror = function() {
+        reject(new Error('Errore di rete durante la richiesta'));
+    };
+    xmlhttp.send();
+});
+
+
+ajaxPromise.then(users => {
+    console.log('Utenti ricevuti:', users);
+})
+.catch(error => {
+    console.error('Errore:', error);
+}); 
 

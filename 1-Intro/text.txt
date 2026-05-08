@@ -1,1 +1,7 @@
 Ciao a tutti
+Attività da completare:
+Scrivere il codice
+Testare le funzionalità
+Correggere eventuali bug
+Documentare il progetto
+Rilasciare la versione finale

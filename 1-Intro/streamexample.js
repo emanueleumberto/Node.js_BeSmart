@@ -142,21 +142,23 @@ wss.on('connection', (ws) => {
 
 // Compressione con zlib.createGzip()
 // const fs = require('fs');
-// const zlib = require('zlib');
-// const source = fs.createReadStream('text.txt');
-// const destination = fs.createWriteStream('text.txt.gz');
-// // i dati originali vengono letti a blocchi, compressi e scritti su disco nel formato .gz
-// source.pipe(zlib.createGzip()).pipe(destination);
+const zlib = require('zlib');
+const source = fs.createReadStream('text.txt');
+const destination = fs.createWriteStream('text.txt.gz');
+// i dati originali vengono letti a blocchi, compressi e scritti su disco nel formato .gz
+source
+    .pipe(zlib.createGzip())
+    .pipe(destination);
 
 // Crittografia con crypto.createCipheriv()
 // Anche la crittografia e la decifratura dei dati è possibile con Trasform stream
 // Il modulo crypto offre metodi per creare flussi che cifrano o decifrano dati in tempo reale
 // const fs = require('fs');
-// const crypto = require('crypto');
-// const key = crypto.randomBytes(32);
-// const iv = crypto.randomBytes(16);
+const crypto = require('crypto');
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
 
-// const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
-// fs.createReadStream('text.txt')
-//     .pipe(cipher)
-//     .pipe(fs.createWriteStream('text_crittografato.txt'));
+const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+fs.createReadStream('text.txt')
+    .pipe(cipher)
+    .pipe(fs.createWriteStream('text_crittografato.txt'));
