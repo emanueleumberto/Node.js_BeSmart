@@ -115,24 +115,49 @@ const MyActor = sequelize.define('myactors', {
 const MyFilm = sequelize.define('myfilm', {
     film_id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING(50),  allowNull: false},
-    actor: {type: DataTypes.INTEGER, allowNull: false}
+    actor: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+        references: {
+            model: MyActor,
+            key: 'actor_id'
+        },
+
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT'
+    }
 })
+
+// MyActor.hasMany(MyFilm, {
+//     foreignKey: 'actor_id',
+//     as: 'films'
+// });
+
+// MyFilm.belongsTo(MyActor, {
+//     foreignKey: 'actor_id',
+//     as: 'actor'
+// });
 
 // sequelize.sync()
 //     .then(() => console.log("Tabella mappata nel DB"))
 //     .catch((error) => console.log("Errore nella mappatura", error))
+
+// await sequelize.sync({ alter: true }); // modifica tabelle
+// await sequelize.sync({ force: true }); // DROP + CREATE
+
+
 
 async function executeTransaction() {
     const transaction = await sequelize.transaction();
 
     try {
         const actor = await MyActor.create({first_name: 'Giuseppe', last_name: 'Verdi', age: 34, email: 'dadd.verdi@example.com'}, {transaction})
-        // const film = await MyFilm.create({title: 'Batman', actor: actor.actor_id}, {transaction})
-        const film = await MyFilm.update({actor: actor.actor_id}, {where: {film_id: 1}, transaction} )
-        if (film === 0){
-            new Error('E')
-        }
-        console.log(film);
+        const film = await MyFilm.create({title: 'Batman', actor: actor.actor_id}, {transaction})
+        // const [numberOfAffectedRows] = await MyFilm.update({actor: actor.actor_id}, {where: {film_id: 1}, transaction} )
+        // if (numberOfAffectedRows === 0){
+        //     throw new Error('Film non aggiornato');
+        // }
 
         await transaction.commit()
         console.log("Modifiche effettuate correttamente nel DB");
