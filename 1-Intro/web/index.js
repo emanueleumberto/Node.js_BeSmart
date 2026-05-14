@@ -30,7 +30,6 @@ console.log(json)
 ogg = JSON.parse(json)
 console.log(ogg)    
 
-
 xmlhttp = new XMLHttpRequest()
 xmlhttp.open('GET', 'https://jsonplaceholder.typicode.com/users') 
 xmlhttp.send()
@@ -54,7 +53,6 @@ const promise = new Promise((resolve, reject) => {
     }, 2000);
 });
 
-
 console.log(promise);
 
 promise.then(result => {
@@ -63,7 +61,6 @@ promise.then(result => {
 .catch(error => {
     console.error('Errore:', error);
 });
-
 
 const ajaxPromise = new Promise((resolve, reject) => {
     const xmlhttp = new XMLHttpRequest();
