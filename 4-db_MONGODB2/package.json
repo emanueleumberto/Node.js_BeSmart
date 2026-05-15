@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch index.js"
+    "start": "node --watch index_orm.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "mongodb": "^7.2.0"
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.2"
   }
 }

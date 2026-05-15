@@ -196,6 +196,40 @@ async function updateMultipleUsers() {
     }
 }
 
+async function deleteUser(username) {
+    try {
+        const db = await conn
+        const users = db.collection('users')
+        const result = await users.deleteOne({firstname: username})
+        if(result.deletedCount > 0) {
+            console.log('Dati eliminati correttamente');
+        } else {
+            console.log('Nessun risultato trovato');
+        }
+
+    } catch(error) {
+        console.error('Errore nella esecuzione della query');
+        console.log(error);
+    }
+}
+
+async function deleteMultipleUsers(age) {
+    try {
+        const db = await conn
+        const users = db.collection('users')
+        const result = await users.deleteMany({age: {$lt: age}})
+        if(result.deletedCount > 0) {
+            console.log(result.deletedCount, 'dati eliminati correttamente');
+        } else {
+            console.log('Nessun risultato trovato');
+        }
+
+    } catch(error) {
+        console.error('Errore nella esecuzione della query');
+        console.log(error);
+    }
+}
+
 
 
 const obj = {firtname: 'Antonio', lastname: 'Bianchi', age: 45, email: 'a.bianchi@example.com', createdAt: new Date()}
@@ -213,3 +247,5 @@ users = [
 // getUserForAge(30)
 // updateUser('Mario', 99)
 // updateMultipleUsers()
+// deleteUser('Giuseppe')
+// deleteMultipleUsers(50)
