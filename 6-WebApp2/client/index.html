@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form id="formUpload">
+            <input type="file" name="file_Upload" />
+            <button type="submit">Salva File</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('#formUpload')
+            .addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.dir(e.target[0].files[0]);
+
+                let data = new FormData();
+                data.append('file_Upload', e.target[0].files[0]);
+
+                fetch('http://localhost:3000/upload',{method:'POST',body:data})
+                    .then(response => response.json())
+                    .then(json => console.log(json))
+                    .catch(error => console.error(error));
+
+            })
+    </script>
+</body>
+</html>
